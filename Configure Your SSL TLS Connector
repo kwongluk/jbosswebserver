@@ -1,0 +1,37 @@
+Configure Your SSL TLS Connector
+
+ Configure Your SSL/TLS Connector
+Before your Tomcat server can accept secure connections, you need to configure an SSL Connector.
+
+Use a text editor to open the Tomcat server.xml file.
+
+Typically, the server.xml file is in the conf folder in your Tomcat’s home directory.
+
+Locate the connector you want the new Keystore to secure.
+
+Usually, a connector with port 443 or 8443 is used; see step 4. Note that you may need to uncomment the connector – remove the comment tags (<!-- and -->).
+
+Configure your Tomcat connector.
+
+Make sure to specify your new keystore filename and password in your connector configuration.
+
+When you are done, your connector should look something like the example below.
+
+Note: Are you using a version of Tomcat prior to Tomcat 7? Then you need to change the keystorePass to keypass.
+
+<Connector port="443" maxHttpHeaderSize="8192" maxThreads="100"
+           minSpareThreads="25" maxSpareThreads="75"
+           enableLookups="false" disableUploadTimeout="true"
+           acceptCount="100" scheme="https" secure="true"
+           SSLEnabled="true" clientAuth="false"
+           sslProtocol="TLS" keyAlias="server"
+           keystoreFile="/home/user_name/your_site_name.jks"
+           keystorePass="your_keystore_password" />
+In the connector configuration above, keystoreFile is the full path to your keystore file, keystorePass is the password you used to create your keystore, and keyAlias is the same alias name (e.g., "server") that you used to generate your CSR.
+
+Save your changes to the server.xml file.
+
+Restart the Tomcat service.
+
+Congratulations! You've successfully installed your SSL certificate.
+
