@@ -1,0 +1,30 @@
+yum install apr apr-devel apr-util apr-util-devel apr-util-ldap elinks krb5-workstation mailcap
+https://access.redhat.com/jbossnetwork/restricted/listSoftware.html
+Select Apache HTTP Server in the Product drop-down menu.
+install Apache HTTP Server in the /opt/ directory.
+The jbcs-httpd24-2.4/httpd directory created by extracting the ZIP archive is the top-level directory for Apache HTTP Server
+On a command line, change directory to HTTPD_HOME.
+#groupadd -g 48 -r apache
+#useradd -c "Apache" -u 48 -g apache -s /bin/sh -r apache
+#chown -R apache:apache *
+You can use ls -l to verify that the apache user is the owner of the directory.
+change to the HTTPD_HOME directory 
+#./.postinstall
+ change to HTTPD_HOME/sbin/
+  #./apachectl start
+  #./apachectl stop
+  #pkill httpd
+#nano HTTPD_HOME/conf/httpd.conf
+  Listen 2080
+  ServerName <hostname>:2080
+
+#nano HTTPD_HOME/conf.d/ssl.conf
+  Listen 2443
+ 
+# chown -R apache:apache HTTPD_HOME/logs/
+# ps -eo euser,egroup,comm | grep httpd
+ 
+systemctl enable jbcs-httpd24-httpd.service
+
+  
+ 
